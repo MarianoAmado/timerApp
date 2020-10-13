@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   time: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 50,
+    fontSize: 60,
     textAlign: 'center',
     marginBottom: 30,
   },

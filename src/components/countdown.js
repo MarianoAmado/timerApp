@@ -3,19 +3,26 @@ import {Text, Button} from 'react-native';
 
 import styles from '../styles';
 
-const CountDown = ({onReturn, time}) => {
+const CountDown = ({onReturn, onFinish, time}) => {
   const [current, setCurrent] = useState(time);
 
   useLayoutEffect(() => {
     let isMounted = true;
+
     setTimeout(() => {
-      if (isMounted && current > 0) setCurrent(current - 1);
+      if (isMounted) {
+        if (current > 0) {
+          setCurrent(current - 1);
+        } else {
+          onFinish();
+        }
+      }
     }, 1000);
 
     return () => {
       isMounted = false;
     };
-  }, [current]);
+  }, [current, onFinish]);
 
   const finished = current > 0;
 
