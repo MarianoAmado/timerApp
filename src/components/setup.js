@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextInput, Button} from 'react-native';
+import {TextInput, Text, TouchableHighlight} from 'react-native';
 
 import styles from '../styles';
 
@@ -13,7 +13,12 @@ const Setup = ({onReturn, time, setTime}) => (
       }}
       defaultValue={`${time}`}
     />
-    <Button title="GO" color="#1B95E0" onPress={onReturn} />
+    <TouchableHighlight
+      onPress={onReturn}
+      style={[styles.btn, styles.btnB]}
+      underlayColor={'#0A84D0'}>
+      <Text style={styles.btnTxt}>GO!</Text>
+    </TouchableHighlight>
   </>
 );
 

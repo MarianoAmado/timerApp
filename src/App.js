@@ -8,7 +8,7 @@ import styles from './styles';
 const App = () => {
   const [running, setRunning] = useState(false);
   const [time, setTime] = useState(60);
-  const [animation, setAnimation] = useState(new Animated.Value(0));
+  const [animation] = useState(new Animated.Value(0));
 
   const animateBackground = () => {
     Animated.timing(animation, {

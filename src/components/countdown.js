@@ -1,5 +1,5 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {Text, Button} from 'react-native';
+import {Text, TouchableHighlight} from 'react-native';
 
 import styles from '../styles';
 
@@ -24,16 +24,17 @@ const CountDown = ({onReturn, onFinish, time}) => {
     };
   }, [current, onFinish]);
 
-  const finished = current > 0;
+  const finished = current <= 0;
 
   return (
     <>
       <Text style={styles.time}>{current}</Text>
-      <Button
-        title={finished ? 'Stop' : 'Got it'}
-        color={finished ? '#e63c39' : '#12d055'}
+      <TouchableHighlight
         onPress={onReturn}
-      />
+        style={[styles.btn, finished ? styles.btnG : styles.btnR]}
+        underlayColor={finished ? '#1a8a41' : '#8a1917'}>
+        <Text style={styles.btnTxt}>{finished ? 'Got it' : 'Stop'}</Text>
+      </TouchableHighlight>
     </>
   );
 };

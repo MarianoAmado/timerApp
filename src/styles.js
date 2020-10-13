@@ -9,11 +9,30 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   time: {
-    color: '#fff',
+    color: '#ffffff',
     fontWeight: 'bold',
     fontSize: 60,
     textAlign: 'center',
     marginBottom: 30,
+  },
+  btn: {
+    borderRadius: 3,
+    paddingHorizontal: 40,
+    paddingVertical: 15,
+  },
+  btnTxt: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  btnR: {
+    backgroundColor: '#e63c39',
+  },
+  btnG: {
+    backgroundColor: '#12d055',
+  },
+  btnB: {
+    backgroundColor: '#1B95E0',
   },
 });
 
