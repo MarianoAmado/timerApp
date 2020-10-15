@@ -20,7 +20,7 @@ const useBgAnimation = animation => {
       animation.stopAnimation();
       animation.setValue(0);
     };
-  });
+  },[animation]);
 };
 
 const TimeUp = ({navigation}) => {
