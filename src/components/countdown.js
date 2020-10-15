@@ -1,28 +1,25 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Text, TouchableHighlight} from 'react-native';
+import useInterval from '@use-it/interval';
 
 import styles from '../styles';
 
+const useCountdown = (time, setTime, onFinish) => {
+  const [timeStep, setTimeStep] = useState(1000);
+
+  useInterval(() => {
+    if (time > 0) {
+      setTime(time - 1);
+    } else {
+      setTimeStep(null);
+      onFinish();
+    }
+  }, timeStep);
+};
+
 const CountDown = ({onReturn, onFinish, time}) => {
   const [current, setCurrent] = useState(time);
-
-  useLayoutEffect(() => {
-    let isMounted = true;
-
-    setTimeout(() => {
-      if (isMounted) {
-        if (current > 0) {
-          setCurrent(current - 1);
-        } else {
-          onFinish();
-        }
-      }
-    }, 1000);
-
-    return () => {
-      isMounted = false;
-    };
-  }, [current, onFinish]);
+  useCountdown(current, setCurrent, onFinish);
 
   const finished = current <= 0;
 

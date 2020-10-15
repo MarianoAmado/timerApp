@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Animated} from 'react-native';
 
-import Setup from './components/setup';
-import CountDown from './components/countdown';
+import Setup from './components/Setup';
+import CountDown from './components/Countdown';
 import styles from './styles';
 
 const App = () => {
@@ -11,15 +11,12 @@ const App = () => {
   const [animation] = useState(new Animated.Value(0));
 
   const animateBackground = () => {
-    Animated.timing(animation, {
-      toValue: 3,
-      duration: 700,
-    }).start(() => {
+    Animated.loop(
       Animated.timing(animation, {
-        toValue: 0,
+        toValue: 3,
         duration: 700,
-      }).start();
-    });
+      }),
+    ).start();
   };
 
   const animatedStyles = {
@@ -36,6 +33,9 @@ const App = () => {
   const stopTimer = () => {
     setRunning(false);
     setTime(60);
+
+    animation.stopAnimation();
+    animation.setValue(0);
   };
 
   return (
