@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import {TextInput, Text, TouchableHighlight, View} from 'react-native';
 
 import styles from '../styles';
+import constants from '../constants';
 
 const Setup = ({navigation}) => {
-  const [time, setTime] = useState(60);
+  const [time, setTime] = useState(constants.defaultTime);
 
   const handleChange = input => {
     let value = Number.parseInt(input);
