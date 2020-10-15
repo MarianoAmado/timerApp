@@ -1,55 +1,24 @@
-import React, {useState} from 'react';
-import {Animated} from 'react-native';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-import Setup from './components/Setup';
-import CountDown from './components/Countdown';
-import styles from './styles';
+import Setup from './screens/Setup';
+import CountDown from './screens/Countdown';
+import TimeUp from './screens/TimeUp';
 
 const App = () => {
-  const [running, setRunning] = useState(false);
-  const [time, setTime] = useState(60);
-  const [animation] = useState(new Animated.Value(0));
-
-  const animateBackground = () => {
-    Animated.loop(
-      Animated.timing(animation, {
-        toValue: 3,
-        duration: 700,
-      }),
-    ).start();
-  };
-
-  const animatedStyles = {
-    backgroundColor: animation.interpolate({
-      inputRange: [0, 1, 2, 3],
-      outputRange: ['#282c34', '#33da44', '#0055da', '#ee0099'],
-    }),
-  };
-
-  const startTimer = () => {
-    setRunning(true);
-  };
-
-  const stopTimer = () => {
-    setRunning(false);
-    setTime(60);
-
-    animation.stopAnimation();
-    animation.setValue(0);
-  };
+  const Stack = createStackNavigator();
 
   return (
-    <Animated.View style={[styles.container, animatedStyles]}>
-      {running ? (
-        <CountDown
-          onReturn={stopTimer}
-          time={time}
-          onFinish={animateBackground}
-        />
-      ) : (
-        <Setup onReturn={startTimer} time={time} setTime={setTime} />
-      )}
-    </Animated.View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Setup"
+        screenOptions={{animationEnabled: false}}>
+        <Stack.Screen name="CountDown" component={CountDown} />
+        <Stack.Screen name="Setup" component={Setup} />
+        <Stack.Screen name="TimeUp" component={TimeUp} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

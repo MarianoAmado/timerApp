@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, TouchableHighlight} from 'react-native';
+import {Text, TouchableHighlight, View} from 'react-native';
 import useInterval from '@use-it/interval';
 
 import styles from '../styles';
@@ -17,22 +17,30 @@ const useCountdown = (time, setTime, onFinish) => {
   }, timeStep);
 };
 
-const CountDown = ({onReturn, onFinish, time}) => {
+const CountDown = ({navigation, route}) => {
+  const {time} = route.params;
   const [current, setCurrent] = useState(time);
+
+  const onClick = () => {
+    navigation.navigate('Setup');
+  };
+
+  const onFinish = () => {
+    navigation.replace('TimeUp');
+  };
+
   useCountdown(current, setCurrent, onFinish);
 
-  const finished = current <= 0;
-
   return (
-    <>
+    <View style={styles.container}>
       <Text style={styles.time}>{current}</Text>
       <TouchableHighlight
-        onPress={onReturn}
-        style={[styles.btn, finished ? styles.btnG : styles.btnR]}
-        underlayColor={finished ? '#1a8a41' : '#8a1917'}>
-        <Text style={styles.btnTxt}>{finished ? 'Got it' : 'Stop'}</Text>
+        onPress={onClick}
+        style={[styles.btn, styles.btnR]}
+        underlayColor={'#8a1917'}>
+        <Text style={styles.btnTxt}>{'Stop'}</Text>
       </TouchableHighlight>
-    </>
+    </View>
   );
 };
 
