@@ -83,6 +83,7 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "devDependencies": {
+    "@babel/plugin-transform-flow-strip-types": "^7.10.4",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-plugin-module-resolver": "^4.0.0",
